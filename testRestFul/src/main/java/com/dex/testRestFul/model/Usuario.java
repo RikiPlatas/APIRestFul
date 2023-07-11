@@ -1,10 +1,17 @@
 package com.dex.testRestFul.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Entity
+@Data
 public class Usuario {
-private int id;
-private String nombre;
+    @Id
+    private int id;
+    private String nombre;
 
-private String apellido;
+    private String apellido;
 
-private int edad;
+    private int edad;
 }
