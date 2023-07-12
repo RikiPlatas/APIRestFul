@@ -32,6 +32,18 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>12.3.1.jre11-preview</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-spring-webmvc -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spring-webmvc</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

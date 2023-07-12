@@ -27,18 +27,18 @@ public class UsuarioController{
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<?> crearUsuario(@PathVariable Integer id) {
-        Optional<Usuario> usuarioConsultado = usuarioService.obtenerUsuarioPorId(id);
+    public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
+        Usuario usuarioConsultado = usuarioService.obtenerUsuarioPorId(usuario.getId());
 
         if (!usuarioConsultado.isPresent()) {
             Usuario nuevoUsuario = new Usuario(); // Crea una instancia de Usuario
-            nuevoUsuario.setNombre("riki");
+            nuevoUsuario.setNombre(usu);
             nuevoUsuario.setApellido("platas");
             nuevoUsuario.setEdad(25);
             usuarioService.crearUsuario(nuevoUsuario); // Guarda el nuevo usuario en la base de datos
         }
 
-        Optional<Usuario> usuarioCreado = usuarioService.obtenerUsuarioPorId(id);
+        Optional<Usuario> usuarioCreado = usuarioService.obtenerUsuarioPorId(usuario.getId());
         if (usuarioCreado.isPresent()) {
             return ResponseEntity.ok(usuarioCreado);
         } else {
