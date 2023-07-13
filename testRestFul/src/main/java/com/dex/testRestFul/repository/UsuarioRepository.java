@@ -1,4 +1,4 @@
-package com.dex.testRestFul.repositories;
+package com.dex.testRestFul.repository;
 
 import com.dex.testRestFul.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
