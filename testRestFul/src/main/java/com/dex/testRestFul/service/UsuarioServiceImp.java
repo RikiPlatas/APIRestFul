@@ -1,10 +1,12 @@
 package com.dex.testRestFul.service;
 
+import com.dex.testRestFul.excepciones.NoSeHaEncontradoException;
 import com.dex.testRestFul.model.Usuario;
 import com.dex.testRestFul.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,4 +25,26 @@ public class UsuarioServiceImp implements IUsuarioService{
     public Optional<Usuario> consultarPorId(Integer id) {
         return usuarioRepository.findById(id);
     }
+
+    @Override
+    public List<Usuario> consultarTodosUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    @Override
+    public Usuario modificarUsuario(Usuario usuario) throws NoSeHaEncontradoException {
+        if(usuarioRepository.existsById(usuario.getId())){
+            return usuarioRepository.save(usuario);
+        }else{
+            throw new NoSeHaEncontradoException("No se ha encontrado el usuario");
+        }
+    }
+
+    @Override
+    public void eliminarUsuario(Integer id) throws NoSeHaEncontradoException {
+        if(usuarioRepository.findById(id).isPresent()){
+            usuarioRepository.deleteById(id);
+        }else {
+            throw new NoSeHaEncontradoException("No existe en usuario");
+        }    }
 }
