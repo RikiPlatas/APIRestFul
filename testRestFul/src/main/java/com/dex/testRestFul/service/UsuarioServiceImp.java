@@ -41,10 +41,17 @@ public class UsuarioServiceImp implements IUsuarioService{
     }
 
     @Override
-    public void eliminarUsuario(Integer id) throws NoSeHaEncontradoException {
-        if(usuarioRepository.findById(id).isPresent()){
-            usuarioRepository.deleteById(id);
-        }else {
-            throw new NoSeHaEncontradoException("No existe en usuario");
-        }    }
+    public void eliminarUsuario(Integer id) {
+        try {
+            if (usuarioRepository.findById(id).isPresent()) {
+                usuarioRepository.deleteById(id);
+            } else {
+                throw new NoSeHaEncontradoException("No existe el usuario");
+            }
+        } catch (NoSeHaEncontradoException e) {
+            // Manejar la excepción aquí o relanzarla si es necesario
+            e.printStackTrace(); // Imprimir el rastro de la excepción
+        }
+    }
+
 }
