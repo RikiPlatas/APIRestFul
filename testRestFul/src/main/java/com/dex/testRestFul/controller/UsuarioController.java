@@ -35,7 +35,6 @@ public class UsuarioController{
         Optional<Usuario> usuario = usuarioServiceImp.consultarPorId(id);
         if (usuario.isPresent()) {
             return ResponseEntity.ok(usuario);
-            
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -56,7 +55,7 @@ public class UsuarioController{
            usuarioServiceImp.insertarUsuario(usuarioActualizado);
            return ResponseEntity.ok(usuarioActualizado);
        }else{
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERROR NO SE ENCUENTRA EL USUARIO CONSULTADO");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ERROR NO SE ENCUENTRA EL USUARIO");
 
        }
     }

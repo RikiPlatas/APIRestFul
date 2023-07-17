@@ -49,7 +49,6 @@ public class UsuarioServiceImp implements IUsuarioService{
                 throw new NoSeHaEncontradoException("No existe el usuario");
             }
         } catch (NoSeHaEncontradoException e) {
-            // Manejar la excepción aquí o relanzarla si es necesario
             e.printStackTrace(); // Imprimir el rastro de la excepción
         }
     }
