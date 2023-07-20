@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,10 +51,16 @@ public class UsuarioController{
         }
     }
     @GetMapping("/all")
-    public ResponseEntity<?> obtenerTodosUsuarios() {
+    public ResponseEntity<?> obtenerTodosUsuarios() throws IllegalAccessException, InstantiationException {
         List<Usuario> usuariosList = usuarioServiceImp.consultarTodosUsuarios();
 
-        return ResponseEntity.ok(usuariosList);
+        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        for (Usuario usuario : usuariosList) {
+            UsuarioDTO usuarioDTO = mapper.map(usuario, UsuarioDTO.class);
+            usuariosDTO.add(usuarioDTO);
+        }
+
+        return ResponseEntity.ok(usuariosDTO);
     }
 
     @PutMapping("/edit")
