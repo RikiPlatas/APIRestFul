@@ -1,5 +1,7 @@
 package com.dex.testRestFul.controller;
 
+import com.dex.testRestFul.dto.Mapper;
+import com.dex.testRestFul.dto.UsuarioDTO;
 import com.dex.testRestFul.excepciones.NoSeHaEncontradoException;
 import com.dex.testRestFul.model.Usuario;
 import com.dex.testRestFul.service.UsuarioServiceImp;
@@ -17,6 +19,13 @@ public class UsuarioController{
 
     @Autowired
     private UsuarioServiceImp usuarioServiceImp;
+    private final Mapper<Usuario, UsuarioDTO> mapper;
+
+    public UsuarioController(UsuarioServiceImp usuarioServiceImp, Mapper<Usuario, UsuarioDTO> mapper) {
+        this.usuarioServiceImp = usuarioServiceImp;
+        this.mapper = mapper;
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario) {
 
@@ -31,10 +40,11 @@ public class UsuarioController{
         }
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> obtenerUsuario(@PathVariable int id) {
+    public ResponseEntity<?> obtenerUsuario(@PathVariable int id) throws IllegalAccessException, InstantiationException {
         Optional<Usuario> usuario = usuarioServiceImp.consultarPorId(id);
         if (usuario.isPresent()) {
-            return ResponseEntity.ok(usuario);
+            UsuarioDTO usuarioDTO = mapper.map(usuario.get(),UsuarioDTO.class);
+            return ResponseEntity.ok(usuarioDTO);
         } else {
             return ResponseEntity.notFound().build();
         }
